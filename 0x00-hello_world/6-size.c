@@ -13,10 +13,6 @@ long longType;
 long long  longlongType;
 float floatType;
 
-/**
-*The code below will print the size of the various
-*data
-*/
 printf("Size of a char: %zu byte(s)\n", sizeof(charType));
 printf("Size of an int: %zu byte(s)\n", sizeof(intType));
 printf("Size of a long int: %zu byte(s)\n", sizeof(longType));
