@@ -16,11 +16,11 @@ float floatType;
 /* The code below will print the size of the various
 *data
 */
-printf("Size of char: %zu bytes\n", sizeof(charType)(s));
-printf("Size of int: %zu bytes\n", sizeof(intType)(s));
-printf("Size of long int: %zu bytes\n", sizeof(longType)(s));
-printf("Size of a long long int: %zu byte\n", sizeof(longlongType)(s));
-printf("Size of a float: %zu bytes\n", sizeof(floatType)(s));
+printf("Size of char: %zu byte(s)\n", sizeof(charType);
+printf("Size of int: %zu byte(s)\n", sizeof(intType);
+printf("Size of long int: %zu byte(s)\n", sizeof(longType);
+printf("Size of a long long int: %zu byte(s)\n", sizeof(longlongType);
+printf("Size of a float: %zu byte(s)\n", sizeof(floatType);
 
 
 return (0);
