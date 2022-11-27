@@ -1,6 +1,6 @@
 # ROCK PAPER SCISSORS GAME
 
-![](.//home/nana/Downloads/rock-paper-scissors-master/design/desktop-preview.jpg);
+![](./design/desktop-preview.jpg);
 
 # Description
 This is a simple rock paper scissors game. 
