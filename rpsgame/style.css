@@ -189,6 +189,9 @@ margin: 50px 100px;
 
 
 @media (max-width:1000px){
+    h1{
+        font-size: 2rem;
+    }
     .selection .btn-circle{
         transform: scale(1);
         margin: 50px 20px;
