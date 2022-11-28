@@ -1,88 +1,108 @@
-const buttons=document.querySelectorAll('.pick')
-const scoreEl=document.getElementById('score');
-const selection=document.getElementById('selection');
-const main=document.getElementById('main');
-const reset=document.getElementById('reset');
-const user_select=document.getElementById('user_select');
-const comp_select=document.getElementById('comp_select');
-const winner=document.getElementById('win');
+  const choiceButtons = document.querySelectorAll(".choice-btn");
+  const gameDiv = document.querySelector(".game");
+  const resultsDiv = document.querySelector(".results");
+  const resultDivs = document.querySelectorAll(".results__result");
+  const resultWinner = document.querySelector(".results__winner");
+  const resultText = document.querySelector(".results__text");
+  const playAgainBtn = document.querySelector(".play-again");
+  const scoreNumber = document.querySelector(".score__number");
+   const btnRules = document.querySelector(".rules-btn");
+    const btnClose = document.querySelector(".close-btn");
+    const modalRules = document.querySelector(".modal");
+  
+    const CHOICES = [{name: "paper",beats: "rock"},{name: "scissors",beats: "paper"},{name: "rock", beats: "scissors"}];  
+   let score = 0;
 
+  
+  // Game Logic
+  choiceButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const choiceName = button.dataset.choice;
+      const choice = CHOICES.find((choice) => choice.name === choiceName);
+      choose(choice);
+    });
+  });
+  
+  function choose(choice) {
+    const aichoice = aiChoose();
+    displayResults([choice, aichoice]);
+    displayWinner([choice, aichoice]);
+  }
+  
+  function aiChoose() {
+    const rand = Math.floor(Math.random() * CHOICES.length);
+    return CHOICES[rand];
+  }
+  
+  function displayResults(results) {
+    resultDivs.forEach((resultDiv, idx) => {
+      setTimeout(() => {
+        resultDiv.innerHTML = `
+          <div class="choice ${results[idx].name}">
+            <img src="images/icon-${results[idx].name}.svg" alt="${results[idx].name}" />
+          </div>
+        `;
+      }, idx * 1000);
+    });
+  
+    gameDiv.classList.toggle("hidden");
+    resultsDiv.classList.toggle("hidden");
+  }
+  
+  function displayWinner(results) {
+    setTimeout(() => {
+      const userWins = isWinner(results);
+      const aiWins = isWinner(results.reverse());
+  
+      if (userWins) {
+        resultText.innerText = "you win";
+        resultDivs[0].classList.toggle("winner");
+        keepScore(1);
+      } else if (aiWins) {
+        resultText.innerText = "you lose";
+        resultDivs[1].classList.toggle("winner");
+        keepScore(-1);
+      } else {
+        resultText.innerText = "draw";
+      }
+      resultWinner.classList.toggle("hidden");
+      resultsDiv.classList.toggle("show-winner");
+    }, 1000);
+  }
+  
+  function isWinner(results) {
+    return results[0].beats === results[1].name;
+  }
+  
+  function keepScore(point) {
+    score += point;
+    scoreNumber.innerText = score;
+  }
+  
+  // Play Again
 
+  playAgainBtn.style.background="white";
+  playAgainBtn.style.color="red";
+  playAgainBtn.addEventListener("click", () => {
+    gameDiv.classList.toggle("hidden");
+    resultsDiv.classList.toggle("hidden");
+    resultDivs.forEach((resultDiv) => {
+      resultDiv.innerHTML = "";
+      resultDiv.classList.remove("winner");
 
-//modal buttons
-const openBtn=document.getElementById('open');
-const closeBtn=document.getElementById('close');
-const modal=document.getElementById('modal');
+    });
 
-const choices=[ 'paper','rock','scissors'];
-let score=0;
-let userChoice=undefined;
-
-buttons.forEach(button=>{
-    button.addEventListener('click',()=>{
-        userChoice = button.getAttribute('data-choice');
-        
-        checkWinner();
-    })
-});
-
-reset.addEventListener('click',()=>{
-    main.style.display='flex';
-    selection.style.display='none';
-
-})
-
-openBtn.addEventListener('click',()=>{
-    modal.style.display='flex';
-
-})
-
-closeBtn.addEventListener('click',()=>{
-    modal.style.display='none';
-
-})
-
-function updateScore(value){
-    score+=value;
-     scoreEl.innerText = score;
-}
-
-function randomChoice(){
-    return choices[Math.floor(Math.random()*choices.length)];
-}
-
-
-function checkWinner(){
-    const compChoice=randomChoice();
-    updateSelection(user_select,userChoice);
-    updateSelection(comp_select,compChoice);
-
-    if (userChoice === compChoice){
-    winner.innerText='draw';
-    }
-   else if(
-    (userChoice === 'paper' && compChoice === 'rock') ||
-   (userChoice === 'rock' && compChoice) === ('scissors') || (userChoice === 'scissors' && compChoice === 'paper'))
-   {
-    updateScore(1);
-    winner.innerText='Won'
-   }
-   else{
-    updateScore(-1);
-    winner.innerText='Lost'
-   }
-    main.style.display='none';
-    selection.style.display='flex';
-}
-
-
-function updateSelection(selectionEl,choice){
-    selectionEl.classList.remove('btn-paper');
-    selectionEl.classList.remove('btn-rock');
-    selectionEl.classList.remove('btn-scissors');
-    const img=selectionEl.querySelector('img');
-    selectionEl.classList.add(`btn-${choice}`);
-    img.src=`./images/icon-${choice}.svg`;
-    img.alt=choice;
-}
-
+    
+  
+    resultText.innerText = "";
+    resultWinner.classList.toggle("hidden");
+    resultsDiv.classList.toggle("show-winner");
+  });
+  
+  // Show/Hide Rules
+  btnRules.addEventListener("click", () => {
+    modalRules.classList.toggle("show-modal");
+  });
+  btnClose.addEventListener("click", () => {
+    modalRules.classList.toggle("show-modal");
+  });
