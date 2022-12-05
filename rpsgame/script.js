@@ -73,7 +73,7 @@
   function isWinner(results) {
     return results[0].beats === results[1].name;
   }
-  
+  //update scores
   function keepScore(point) {
     score += point;
     scoreNumber.innerText = score;
@@ -81,8 +81,7 @@
   
   // Play Again
 
-  playAgainBtn.style.background="white";
-  playAgainBtn.style.color="red";
+  
   playAgainBtn.addEventListener("click", () => {
     gameDiv.classList.toggle("hidden");
     resultsDiv.classList.toggle("hidden");

@@ -27,7 +27,7 @@
 body {
   font-family: "Barlow Semi Condensed", sans-serif;
   background:radial-gradient(circle at 50% 20%,var(--bg-grad-1),var(--bg-grad-2));
-  min-height: 135vh;
+   min-height: 120vh; 
   text-transform: uppercase;
   color: var(--light-text);
 }
@@ -46,7 +46,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 150px;
+  height: 135px;
   border: 3px solid var(--outline);
   border-radius: 20px;
   padding: 1rem 1.4rem 1rem 2rem;
@@ -89,7 +89,7 @@ body {
     "paper scissors"
     "rock rock";
   place-items: center;
-  height: 30rem;
+  height: 25rem;
   padding-top: 4rem;
 }
 .game::before {
@@ -119,6 +119,10 @@ body {
   place-items: center;
   box-shadow: inset 0 0.5rem var(--shadow-light);
 }
+
+
+
+
 .choice::before,
 .choice::after {
   content: "";
@@ -168,7 +172,6 @@ body {
   grid-area: rock;
 }
  
-/* Results */
 .results {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -218,7 +221,6 @@ body {
   box-shadow: 0 0 0 40px #293251, 0 0 0 80px #232c4b, 0 0 0 130px #1e2949;
   animation: winner 1s ease forwards;
 }
-
 @keyframes winner {
   from {
     opacity: 0;
@@ -227,6 +229,7 @@ body {
     opacity: 1;
   }
 }
+
 
 .results__winner {
   grid-area: result-winner;
@@ -242,7 +245,7 @@ body {
   outline: none;
   border: 2px solid transparent;
   border-radius: 0.6rem;
-  color: var(--dark-text);
+  color: red;
   padding: 0.6rem 3.5rem;
   font-family: inherit;
   text-transform: inherit;
@@ -253,11 +256,14 @@ body {
 .play-again:focus {
   border: 2px solid var(--outline);
 }
+#play-again{
+  background: #fff;
 
+}
 /* Rules Button */
 .rules-btn {
   position: absolute;
-  bottom: 1rem;
+  bottom: 0;
   right: 2rem;
   background: none;
   outline: none;
@@ -271,6 +277,7 @@ body {
   letter-spacing: 0.1em;
   cursor: pointer;
 }
+
 .rules-btn:focus {
   border: 2px solid #fff;
 }
@@ -284,7 +291,6 @@ body {
   position: absolute;
   height: 100%;
   width: 100%;
-  
   top: 0;
   left: 0;
   display: grid;
@@ -338,13 +344,28 @@ body {
   display: none;
 }
 
-@media (max-width:1000px){
+
+@media (max-width:500px){
+ 
+  .winner .choice::after{
+    display: none;
+  }
+  .container{
+    position:relative;
+    margin:0 auto;
+    left:0;
+    right:0;
+    overflow: hidden;
+    
+  }
   .header{
     border-radius: 0%;
-    width:280px;
-    height:150px;
+    width:300px;
+    height:100px;
     align-items: center;
-    margin: auto;
+    justify-content: space-between;
+   
+    margin:10px auto;
   }
   .header img{
     width:100px;
@@ -354,13 +375,16 @@ body {
   }
   .score{
     width:100px;
-    height:100px;
-    border-radius: 0;
+    height:80px;
+    border-radius: 0.5;
   }
 
     
     .game .choice-btn{
-        transform: scale(0.5);
+        transform: scale(0.45);
+        position: absolute;
+        right:0;
+        left:30%;
         margin: 0 auto;
         }
     .results__text{
@@ -368,17 +392,105 @@ body {
     }
     .game{
         width:300px;
+       top:-50px;
+
     }
     .game::before {
       content: "";
       position: absolute;
-      width: 102%;
+      background-size: 230px 190px;
+      right:0;
+      width: -105%;
       height: 100%;
-      left: 4%;
-      top: 35%;
+      left: 22%;
+      top: 31%;
      
     }
+    /*results*/
+    .results{
+    position: absolute;
+    top:160px;
+    scale: 0.6;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    }
+    .results__winner
+   {
+    position: absolute;
+    top:390px;
+    width:300px;
+  
+      }
+    #you-picked, #the-house{
+      position: absolute;
+      top:150px;
+      font-size: 24px;
+      width:350px;
+     margin:0 10px;
+    }
+   
+    
+     .results__text{
+    position: absolute;
+    top:-110px;
+    font-size: 68px;
+     } 
+     .results__heading {
+      padding: 4rem 4rem 8rem;
+    }
+  
+     .play-again{
+      color:#16213d;
+      position: absolute;
+      top:-15px;
+      width:270px;
+      height:70px;
+     }
+    
+     .rules-btn{
+    position: absolute;
+    height:35px;
+    top:480px;
+    left:0;
+    right:0;
+    margin: 0 auto;
+    width:100px;
+    padding:5px;
+    border-width:thin;
+    font-size: 16px;  
+     
+    
+     }
+     .modal__container{
+      max-width:100%;
+      min-height:100%;
+     }
+    .modal__header{
+    align-items: center;
+    justify-content: center;
+  
+    }   
+   .close-btn{
+    position: absolute;
+    left:40px;
+    right:0;
+    margin: 0 auto;
+    bottom:300px;
 
-      
+   }
+   .results__result:first-of-type {
+    box-shadow: 0 0 0 40px #293251, 0 0 0 80px #252d4a, 0 0 0 130px #26304e;
+    animation: winner 1s ease forwards;
+  }
+  @keyframes winner {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+   
     
 }
