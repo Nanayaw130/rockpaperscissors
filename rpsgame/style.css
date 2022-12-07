@@ -346,7 +346,13 @@ body {
 
 
 @media (max-width:500px){
- 
+  html, body {
+    margin: 0;
+    position: relative;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+  }
   .winner .choice::after{
     display: none;
   }
@@ -369,8 +375,8 @@ body {
     right: 0;
     text-align: center;
     justify-content: space-between;  
-    
   }
+
   .header img{
     width:100px;
     height:60px;
@@ -414,7 +420,7 @@ body {
       top: 31%;
       align-items: center;
       margin:10px auto;
-     
+      overflow-x: hidden;
     }
     /*results*/
     .results{
@@ -470,7 +476,7 @@ body {
     padding:5px;
     border-width:thin;
     font-size: 16px;  
-     
+    
     
      }
      .modal__container{
